@@ -1,40 +1,47 @@
 # -*- coding: utf-8 -*-
-## learn python the hard way
-## toRomanNumeral.py
-## Copyright 2017 by Mike Daugherty (mikedaug@yahoo.com)
-## last modified on: 2017-10-02 Mon 08:03 PM
+# learn python the hard way
+# toRomanNumeral.py
+# Copyright 2017 by Mike Daugherty (mikedaug@yahoo.com)
+# last modified on: 2017-10-02 Mon 08:03 PM
 ##
 ##
-## https://learnpythonthehardway.org/book/
-## note: python good coding practice to never have a line over eighty chars long
-##345678901234567890123456789012345678901234567890123456789012345678901234567890
+# https://learnpythonthehardway.org/book/
+# note: python good coding practice to never have a line over eighty chars long
+# 345678901234567890123456789012345678901234567890123456789012345678901234567890
 ##
 import unittest
 
-#### My program code here
+# My program code here
 #################################################
 
+# need to know if x is 1, 5, or 10.
+# if 1, return 'I' and subtract 1 from x
+# if 5, return 'V' and subtract 5 from x
+# if 10, return 'X' and subtract 10 from x
+
+
 def convert_to_roman(x):
-    
-    if x == 1:
-        return 'I'
+    roman = ''
+    while x > 0:
+        if x == 10:
+            roman += 'X'
+            x = x - 10
+        elif x == 9:
+            roman += 'IX'
+            x = x - 9
+        elif x >= 5:
+            roman += 'V'
+            x = x - 5
+        elif x == 4:
+            roman += 'IV'
+            x = x - 4
+        elif x >= 1:
+            roman += 'I'
+            x = x - 1
+    return roman
 
-    if x == 2:
-        return 'II'
 
-    if x == 3:
-        return 'III'
-    
-    if x == 5:
-        return 'V'
-
-    return None
-
-
-
-
-
-#### My unit tests here...
+# My unit tests here...
 #################################################
 class convert_to_roman_tests(unittest.TestCase):
 
@@ -53,11 +60,25 @@ class convert_to_roman_tests(unittest.TestCase):
     def testFive(self):
         self.failUnless(convert_to_roman(5) == 'V')
 
+    def testSix(self):
+        self.failUnless(convert_to_roman(6) == 'VI')
+
+    def testSeven(self):
+        self.failUnless(convert_to_roman(7) == 'VII')
+
+    def testEight(self):
+        self.failUnless(convert_to_roman(8) == 'VIII')
+    
+    def testNine(self):
+        self.failUnless(convert_to_roman(9) == 'IX')
+
+    def testTen(self):
+        self.failUnless(convert_to_roman(10) == 'X')
 
 
 def main():
     unittest.main()
 
+
 if __name__ == '__main__':
     main()
-
