@@ -14,16 +14,25 @@ import unittest
 # My program code here
 #################################################
 
-# need to know if x is 1, 5, or 10.
+# special roman numerals
 # if 1, return 'I' and subtract 1 from x
 # if 5, return 'V' and subtract 5 from x
 # if 10, return 'X' and subtract 10 from x
+# if 50, return 'L' and subtract 50 from x
+# if 100, return 'C' and subtract 100 from x
+# if 1000, return 'M' and subtract 1000 from x
 
 
 def convert_to_roman(x):
     roman = ''
     while x > 0:
-        if x == 10:
+        if x >= 50:
+            roman += 'L'
+            x -= 50
+        elif x >= 40:
+            roman += 'XL'
+            x -= 40
+        elif x >= 10:
             roman += 'X'
             x = x - 10
         elif x == 9:
@@ -68,13 +77,36 @@ class convert_to_roman_tests(unittest.TestCase):
 
     def testEight(self):
         self.failUnless(convert_to_roman(8) == 'VIII')
-    
+
     def testNine(self):
         self.failUnless(convert_to_roman(9) == 'IX')
 
     def testTen(self):
         self.failUnless(convert_to_roman(10) == 'X')
 
+    def testEleven(self):
+        self.failUnless(convert_to_roman(11) == 'XI')
+
+    def testTwentyFour(self):
+        self.failUnless(convert_to_roman(24) == 'XXIV')
+
+    def testTwentyFive(self):
+        self.failUnless(convert_to_roman(25) == 'XXV')
+
+    def testThirtySeven(self):
+        self.failUnless(convert_to_roman(37) == 'XXXVII')
+
+    def testThirtyNine(self):
+        self.failUnless(convert_to_roman(39) == 'XXXIX')
+
+    def testForty(self):
+        self.failUnless(convert_to_roman(40) == 'XL')
+
+    def testEightyThree(self):
+        self.failUnless(convert_to_roman(83) == 'LXXXIII')
+
+    def testEightyNine(self):
+        self.failUnless(convert_to_roman(89) == 'LXXXIX')
 
 def main():
     unittest.main()
